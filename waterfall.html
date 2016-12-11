@@ -1,181 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Waterfall</title>
-    <style media="screen">
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        h2 {
-            text-align: center;
-            line-height: 100px;
-        }
-
-        .content {
-            position: relative;
-        }
-
-        .box {
-            float: left;
-            padding: 10px 0 0 15px;
-        }
-
-        .pic {
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid rgb(61, 61, 61);
-            width: 180px;
-        }
-
-        img {
-            width: 180px;
-            margin: 0;
-            display: block
-        }
-
-    </style>
-    <script type="text/javascript">
-        window.onload = function() {
-            waterfall("content", "box");
-        }
-        var data = {
-            'img':[
-                {'src':'img_1.jpg'},
-                {'src':'img_2.jpg'},
-                {'src':'img_3.jpg'},
-                {'src':'img_4.jpg'},
-                {'src':'img_5.jpg'}
-            ]
-        }
-        window.onscroll = function () {
-            var parent = document.getElementById('content');
-            if (checkscrollside()) {
-                for (var i = 0; i < data.img.length; i++) {
-                    var oBox = document.createElement('div');
-                    oBox.className = 'box';
-                    parent.appendChild(oBox);
-
-                    var oPic = document.createElement('div');
-                    oPic.className = 'pic';
-                    oBox.appendChild(oPic);
-
-                    var img = document.createElement('img');
-                    img.src = './images/' + data.img[i].src;
-                    oPic.appendChild(img);
-                }
-                waterfall('content','box')
-            }
-        }
-        function checkscrollside() {
-            var parent = document.getElementById('content');
-            var pins = getObj(parent, 'box');
-            var lastPinH = pins[pins.length - 1].offsetTop + Math.floor(pins[pins.length - 1].offsetHeight / 2);
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-            var documentH = document.documentElement.clientHeight;
-            return (lastPinH < scrollTop+documentH)?true:false;
-        }
-        function waterfall(parent, box) {
-            var iParent = document.getElementById(parent); //获取父元素
-            var aPin = getObj(iParent, box); //获取子元素数组
-            var iPinW = aPin[0].offsetWidth; //获取一个子元素的宽
-            var num = Math.floor(document.documentElement.clientWidth / iPinW); //获取一排能有多少个
-            iParent.style.cssText = 'width:' + iPinW * num + 'px;margin:0 auto;';
-
-            var pinHArr = []; //元素的高的集合
-            for (var i = 0; i < aPin.length; i++) {
-                var iPinH = aPin[i].offsetHeight; //每一个元素的高<<<rgb(250, 17, 17)
-                if (i < num) {
-                    pinHArr[i] = iPinH;
-                } else {
-                    var minH = Math.min.apply(null, pinHArr);
-                    var minHIndex = getminIndex(pinHArr, minH);
-
-                    aPin[i].style.position = 'absolute';
-                    aPin[i].style.top = minH + 'px';
-                    aPin[i].style.left = aPin[minHIndex].offsetLeft + 'px';
-
-                    pinHArr[minHIndex] += aPin[i].offsetHeight;//<<<<<<offsetHeightrgb(250, 17, 17)
-                }
-            }
-        }
-
-        function getminIndex(arr, minH) {
-            for (var i in arr) {
-                if (arr[i] === minH) {
-                    return i;
-                }
-            }
-        }
-
-        function getObj(parent, className) {
-            var tags = parent.getElementsByTagName('*');
-            var arr = [];
-            for (var i = 0; i < tags.length; i++) {
-                if (tags[i].className === className) {
-                    arr.push(tags[i]);
-                }
-            }
-            return arr;
-        }
-
-
-
-    </script>
+    <title>waterfall</title>
 </head>
-
+<style media="screen">
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    h2{
+        text-align: center;
+        line-height: 100px;
+    }
+    .content{
+        position: relative;
+    }
+    .box{
+        float: left;
+        padding: 15px 0 0 10px;
+    }
+    .img{
+        padding: 10px;
+        border: 1px solid rgb(0, 0, 9);
+    }
+    img{
+        width: 180px;
+    }
+</style>
 <body>
     <h2>waterfall</h2>
     <div class="content" id="content">
         <div class="box">
-            <div class="pic"><img src="./images/img_1.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_1.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_2.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_2.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_3.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_3.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_4.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_4.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_5.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_5.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_6.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_6.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_7.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_7.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_8.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_8.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_6.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_1.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_7.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_2.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_8.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_3.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_7.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_4.jpg" alt=""></div>
         </div>
         <div class="box">
-            <div class="pic"><img src="./images/img_8.jpg" alt=""></div>
-        </div>
-        <div class="box">
-            <div class="pic"><img src="./images/img_7.jpg" alt=""></div>
-        </div>
-        <div class="box">
-            <div class="pic"><img src="./images/img_8.jpg" alt=""></div>
+            <div class="img"><img src="./images/img_5.jpg" alt=""></div>
         </div>
     </div>
+    <script src="./waterfall.js" charset="utf-8"></script>
 </body>
-
 </html>
